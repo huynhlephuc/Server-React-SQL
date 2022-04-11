@@ -3,6 +3,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 // thu vien gup ket noi react native
 const cors = require('cors');
+require('dotenv').config()
+
 
 
 const app = express();
@@ -11,11 +13,11 @@ app.use(cors());
 
 // server cua db
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
+    host: process.env.HOST,
+    user: process.env.USER,
     password: '',
-    port: 3306,
-    database: 'test',
+    port: process.env.PORT,
+    database: process.env.DATABASE,
 });
 
 db.connect();
