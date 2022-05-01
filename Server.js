@@ -24,7 +24,7 @@ db.connect();
 
 //xu li get (select)
 app.get('/data',(req, res) => {
-    var sql = 'select * from sinhvien';
+    var sql = 'select * from sanpham';
     db.query(sql,(err,result)=>{
         if (err) throw err;
         console.log(result);
@@ -32,12 +32,25 @@ app.get('/data',(req, res) => {
     });
 })
 
+
+// xu li scan (select where)
+app.get('/data/:id',(req, res) => {
+    console.log(req.params.id);
+    var sql = `select * from sanpham WHERE idsanpham = ${req.params.id}`;
+    db.query(sql,(err,result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.send(result);// gui ket qua cho react
+    });
+})
+
+
 // xu li post (insert)
 app.post('/data',(req, res) => {
     console.log(req.body);
     // truyen vao tham so
     var data = {name:req.body.name, age:req.body.age, address:req.body.address};
-    var sql = 'INSERT INTO sinhvien SET ?';
+    var sql = 'INSERT INTO sanpham SET ?';
     db.query(sql,data,(err,result)=>{
         if (err) throw err;
         console.log(result);
@@ -52,6 +65,6 @@ app.post('/data',(req, res) => {
 })
 
 // thay doi dia chi ip cua mang
-app.listen(3001,'192.168.56.1',()=>{
+app.listen(3001,'192.168.1.15',()=>{
     console.log('server dang chay o cong 3001')
 })
