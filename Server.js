@@ -36,13 +36,53 @@ app.get('/data',(req, res) => {
 // xu li scan (select where)
 app.get('/data/:id',(req, res) => {
     console.log(req.params.id);
-    var sql = `select * from sanpham WHERE idsanpham = ${req.params.id}`;
+    var sql = `SELECT * FROM losp INNER JOIN lohaisan ON losp.idlohaisan = lohaisan.idlo WHERE idsanpham =  ${req.params.id}`;
+    db.query(sql,(err,result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.send({
+            data: result
+        });// gui ket qua cho react
+    });
+
+})
+app.get('/data/sanpham/:id',(req, res) => {
+    console.log(req.params.id);
+    var sql = `SELECT * FROM sanpham  WHERE idsanpham =  ${req.params.id}`;
     db.query(sql,(err,result)=>{
         if (err) throw err;
         console.log(result);
         res.send(result);// gui ket qua cho react
     });
+
 })
+
+app.get('/data/daily/:id',(req, res) => {
+    console.log(req.params.id);
+    var sql = `SELECT * FROM daily WHERE iddaily =  ${req.params.id}`;
+    db.query(sql,(err,result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.json(
+             result
+        );// gui ket qua cho react
+    });
+
+})
+
+app.get('/data/donvinuoi/:id',(req, res) => {
+    console.log(req.params.id);
+    var sql = `SELECT * FROM donvinuoi WHERE idnuoi =  ${req.params.id}`;
+    db.query(sql,(err,result)=>{
+        if (err) throw err;
+        console.log(result);
+        res.json(
+             result
+        );// gui ket qua cho react
+    });
+
+})
+
 
 
 // xu li post (insert)
@@ -65,6 +105,6 @@ app.post('/data',(req, res) => {
 })
 
 // thay doi dia chi ip cua mang
-app.listen(3001,'192.168.1.15',()=>{
+app.listen(3001,'192.168.1.6',()=>{
     console.log('server dang chay o cong 3001')
 })
