@@ -105,6 +105,6 @@ app.post('/data',(req, res) => {
 })
 
 // thay doi dia chi ip cua mang
-app.listen(3001,'192.168.1.6',()=>{
+app.listen(3001,'192.168.1.10',()=>{
     console.log('server dang chay o cong 3001')
 })
