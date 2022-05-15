@@ -22,31 +22,32 @@ const db = mysql.createConnection({
 
 db.connect();
 
-//xu li get (select)
+//xu li get all lo sp
 app.get('/data',(req, res) => {
-    var sql = 'select * from sanpham';
+    var sql = 'select * from losp';
     db.query(sql,(err,result)=>{
         if (err) throw err;
-        console.log(result);
+        console.log("🚀 ~ file: Server.js ~ line 31 ~ db.query ~ result", result)
         res.send(result);// gui ket qua cho react
     });
 })
 
 
-// xu li scan (select where)
+// xu li lohaisan id 
 app.get('/data/:id',(req, res) => {
-    console.log(req.params.id);
-    var sql = `SELECT * FROM losp INNER JOIN lohaisan ON losp.idlohaisan = lohaisan.idlo WHERE idsanpham =  ${req.params.id}`;
+    console.log("🚀 ~ file: Server.js ~ line 39 ~ app.get ~ req.params.id", req.params.id)
+    var sql = `SELECT * FROM losp INNER JOIN lohaisan ON losp.idlohaisan = lohaisan.idlo WHERE idlohaisan =  ${req.params.id}`;
     db.query(sql,(err,result)=>{
         if (err) throw err;
         console.log(result);
+        console.log("🚀 ~ file: Server.js ~ line 43 ~ db.query ~ result", result)
         res.send({
             data: result
         });// gui ket qua cho react
     });
 
 })
-app.get('/data/sanpham/:id',(req, res) => {
+/* app.get('/data/sanpham/:id',(req, res) => {
     console.log(req.params.id);
     var sql = `SELECT * FROM sanpham  WHERE idsanpham =  ${req.params.id}`;
     db.query(sql,(err,result)=>{
@@ -56,7 +57,7 @@ app.get('/data/sanpham/:id',(req, res) => {
     });
 
 })
-
+ */
 app.get('/data/daily/:id',(req, res) => {
     console.log(req.params.id);
     var sql = `SELECT * FROM daily WHERE iddaily =  ${req.params.id}`;
@@ -86,7 +87,7 @@ app.get('/data/donvinuoi/:id',(req, res) => {
 
 
 // xu li post (insert)
-app.post('/data',(req, res) => {
+/* app.post('/data',(req, res) => {
     console.log(req.body);
     // truyen vao tham so
     var data = {name:req.body.name, age:req.body.age, address:req.body.address};
@@ -102,9 +103,9 @@ app.post('/data',(req, res) => {
             address:req.body.address
         });// gui ket qua cho react
     });
-})
+}) */
 
 // thay doi dia chi ip cua mang
-app.listen(3001,'192.168.1.10',()=>{
+app.listen(3001,'192.168.1.6',()=>{
     console.log('server dang chay o cong 3001')
 })
