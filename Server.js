@@ -36,7 +36,7 @@ app.get('/data',(req, res) => {
 // xu li lohaisan id 
 app.get('/data/:id',(req, res) => {
     console.log("🚀 ~ file: Server.js ~ line 39 ~ app.get ~ req.params.id", req.params.id)
-    var sql = `SELECT * FROM losp INNER JOIN lohaisan ON losp.idlohaisan = lohaisan.idlo WHERE idlohaisan =  ${req.params.id}`;
+    var sql = `SELECT * FROM losp INNER JOIN lohaisan ON losp.idlo = lohaisan.idlo WHERE losp.idlo =  ${req.params.id}`;
     db.query(sql,(err,result)=>{
         if (err) throw err;
         console.log(result);
@@ -106,6 +106,6 @@ app.get('/data/donvinuoi/:id',(req, res) => {
 }) */
 
 // thay doi dia chi ip cua mang
-app.listen(3001,'192.168.1.6',()=>{
+app.listen(3001,'192.168.1.16',()=>{
     console.log('server dang chay o cong 3001')
 })
