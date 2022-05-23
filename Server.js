@@ -105,7 +105,7 @@ app.get('/data/donvinuoi/:id',(req, res) => {
     });
 }) */
 
-// thay doi dia chi ip cua mang
-app.listen(3001,'192.168.10.95',()=>{
+// thay doi dia chi ip cua manghe
+app.listen(process.env.PORT,'192.168.10.95',()=>{
     console.log('server dang chay o cong 3001')
 })
